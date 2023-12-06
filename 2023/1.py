@@ -39,8 +39,7 @@ def part_2():
     for item in inputs:
         res = 0
 
-        print(item)
-        ex = "[0-9]|one|two|three|four|five|six|seven|eight|nine"
+        ex = "[0-9]|oneight|one|two|three|four|five|six|seven|eight|nine"
 
         dict = {
             'one':1, 
@@ -57,9 +56,15 @@ def part_2():
 
 
         matches = re.findall(ex, item)
-        if matches[0] in dict:
+        
+        if matches[0] == 'oneight':
+            matches[0] = 1
+        elif matches[0] in dict:
             matches[0] = dict.get(matches[0])
-        if matches[-1] in dict:
+        
+        if matches[-1] == 'oneight':
+                matches[-1] = 8
+        elif matches[-1] in dict:
             matches[-1] = dict.get(matches[-1])
             
         if matches:
@@ -67,9 +72,7 @@ def part_2():
                 res = int(str(matches[0]) + str(matches[-1]))
             else:
                 res = int(str(matches[0]) + str(matches[0]))
-            print(matches)
         count += res
-        print(res)
 
     return count
     
