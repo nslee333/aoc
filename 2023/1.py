@@ -4,8 +4,6 @@ import re
 def part_1():
     inputs = []
     count = 0
-
-
     with open('input_1.txt', mode='r', encoding='utf-8') as f:
         for x in f:
             x = x.replace('\n', '')
@@ -24,7 +22,6 @@ def part_1():
         count += res
 
     return count
-
 
 def part_2():
     inputs = []
