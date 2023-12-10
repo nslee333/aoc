@@ -49,6 +49,7 @@ def part_2():
     
     for item in inputs:
         print(inputs)
+        # & It won't loop past the first string :(
 
         arr = list(item)
         matches = []
