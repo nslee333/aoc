@@ -30,7 +30,7 @@ def part_2():
     inputs = []
     count = 0
 
-    with open('input_1.txt', mode='r', encoding='utf-8') as f:
+    with open('input_2.txt', mode='r', encoding='utf-8') as f:
         for x in f:
             x = x.replace('\n', '')
             inputs.append(x)
@@ -48,6 +48,7 @@ def part_2():
     }
     
     for item in inputs:
+        print(inputs)
 
         arr = list(item)
         matches = []
@@ -57,58 +58,52 @@ def part_2():
         j = i + 1
         
         while i < len(arr):
+            print(item)
+            print(sub)
+            # print(matches)
             if arr[i].isnumeric():
                 matches.append(arr[i])
-                break
+                i += 1
+                j = i + 1
+                continue
             
-            sub.append(arr[j])
+            if len(sub) == 0:
+                sub.append(arr[i])
+                sub.append(arr[j])
+                j += 1
+                continue
+                
+            if len(sub) < 3:
+                sub.append(arr[j])
+                j += 1
+                continue
             
-            if arr[j].isnumeric():
-                matches.append(arr[j])
-                break
-            
-            if len(sub) >= 3 and len(sub) < 6:
+            if len(sub) >= 3 or len(sub) < 6:
                 dict_entry = dict.get(''.join(sub))
+                
                 if dict_entry:
                     matches.append(dict_entry)
-                    break
-                
-            if len(sub) > 5:
                 sub.clear()
                 i += 1
                 j = i + 1
-                sub.append(arr[i])
-                continue
-            j += 1
-        
-        i = len(arr) - 1
-        j = i - 1
-        sub = []
-        
             
-        while i > 0:
-            if arr[i].isnumeric():
-                matches.append(arr[i])
-                break
-            
-            sub.append(arr[j])
-            
-            if arr[j].isnumeric():
-                matches.append(arr[j])
-                break
-
-            if len(sub) >= 3 and len(sub) < 6:
+            if len(sub) > 5:
+                sub.pop()
                 dict_entry = dict.get(''.join(sub))
                 if dict_entry:
                     matches.append(dict_entry)
-                    break
-
-            if len(sub) > 5:
-                sub.clear()
-                i -= 1
-                j = i - 1
-                sub.append(arr[i])
-                continue
+                    
+                sub.pop()
+                dict_entry = dict.get(''.join(sub))
+                if dict_entry:
+                    matches.append(dict_entry)
+                    
+                i += 1
+                j = i + 1
+                
+            
+            
+       
        
         if matches:
             if len(matches) >= 2:
